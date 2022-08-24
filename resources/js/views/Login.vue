@@ -37,6 +37,18 @@ export default {
   },
   methods: {
     postLogin() {
+      axios.post("https://reqres.in/api/login", {
+        email: this.email,
+        password: this.password
+      }).then((res) => {
+        // console.log(res.data)
+        if(res.status === 200){
+          localStorage.setItem("token", res.data.token);
+          this.$router.push({name: "dashboard-page"});
+        }
+      }).catch((err) => {
+        console.error(err)
+      })
       this.show = true;
     }
   },
